@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Fresno State Spotify Stats",
   description: "See how your taste compares to your peers'",
 };
