@@ -11,9 +11,10 @@ import { redirect } from "next/navigation";
 export default async function Home() {
     const session = await auth();
     if (!session) redirect("/sign-in");
-    return <main>{
-        <p className="flex justify-center items-center font-bold">
-            Your Spotify Stats
-        </p>
-    }</main>;
+
+    const res = await fetch("/api/spotify/top_tracks/route.ts", {cache : "no-store"});
+    if (!res.ok) return <main className="p-6">Failed to load</main>;
+    const data: Report = await res.json();
+
+    return data
 }
