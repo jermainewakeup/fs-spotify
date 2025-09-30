@@ -14,7 +14,15 @@ export default async function Home() {
 
     const res = await fetch("/api/spotify/top_tracks/route.ts", {cache : "no-store"});
     if (!res.ok) return <main className="p-6">Failed to load</main>;
-    const data: Report = await res.json();
 
-    return data
+    const data = await res.json(); // { items: [...] }
+
+    return (
+        <main className="p-6">
+            <h1 className="text-xl font-semibold mb-4">Your Top Tracks</h1>
+            <ul className="space-y-2">
+                {data.items?.map}
+            </ul>
+        </main>
+    );
 }
