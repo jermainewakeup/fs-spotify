@@ -1,14 +1,14 @@
-import {auth} from "@/auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export async function GET() {
-    const session = await auth()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const token = (session as any).accessToken;
-    const result = await fetch('https://api.spotify.com/v1/me/top/tracks',{
-        method: 'GET', headers: {Authorization: 'Bearer' + token}
-    })
+export async function GET(req: NextRequest) {
+    const jwt = await getToken({ req });
+    const access = jwt?.accessToken;
+    if (!access) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const data = await result.json()
-    return data.items
+    const r = await fetch("https://api.spotify.com/v1/me/top/tracks?limit=20", {
+        headers: { Authorization: `Bearer ${access}` },
+        cache: "no-store",
+    });
+    return NextResponse.json(await r.json());
 }
