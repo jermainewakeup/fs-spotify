@@ -6,11 +6,18 @@ export const runtime = "nodejs";
 export async function GET(req: NextRequest) {
     const jwt = await getToken({ req });
     const access = jwt?.accessToken;
-    if (!access) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!access) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const r = await fetch("https://api.spotify.com/v1/me/top/tracks?limit=20", {
+    const url = new URL("https://api.spotify.com/v1/me/top/tracks");
+    url.searchParams.set("limit", "20");
+
+    const r = await fetch(url, {
         headers: { Authorization: `Bearer ${access}` },
         cache: "no-store",
     });
-    return NextResponse.json(await r.json());
+
+    const body = await r.json().catch(() => ({}));
+    return NextResponse.json(body, { status: r.status });
 }
