@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
+export const runtime = "nodejs";
+
 export async function GET(req: NextRequest) {
     const jwt = await getToken({ req });
     const access = jwt?.accessToken;
