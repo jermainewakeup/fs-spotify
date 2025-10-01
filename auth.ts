@@ -2,9 +2,6 @@ import NextAuth from "next-auth"
 import Spotify from "next-auth/providers/spotify"
 import {PrismaAdapter} from "@auth/prisma-adapter";
 import { prisma } from "@/prisma"
-
-declare module "next-auth" { interface Session { spotifyToken?: string}}
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: PrismaAdapter(prisma),
     session : {strategy: "jwt"},

@@ -3,9 +3,6 @@ export type Track = {
     id: string;
     name: string;
 };
-type TopTracks = {
-    items: Track[];
-};
 export default async function ReportGenerator({ items }: { items: Track[] }) {
     if (!items.length) return <main className="p-6">No tracks.</main>;
     return (
