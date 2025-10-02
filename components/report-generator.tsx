@@ -1,4 +1,3 @@
-// components/ReportGenerator.tsx
 export type Track = {
     id: string;
     name: string;

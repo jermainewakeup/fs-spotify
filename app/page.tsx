@@ -10,8 +10,7 @@ export default async function Home() {
     const session = await auth();
     if (!session) redirect("/sign-in");
 
-    const base = process.env.AUTH_URL;
-    const res = await fetch(new URL('/api/spotify/top_tracks/', base), {cache: "no-store"})
+    const res = await fetch('/api/spotify/top_tracks/', {cache: "no-store"})
     const data: TopTracks = await res.json()
 
     return <ReportGenerator items={(data.items ?? []).map(t => ({ id: t.id, name: t.name }))} />;
