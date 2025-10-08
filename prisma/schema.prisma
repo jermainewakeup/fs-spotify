@@ -62,6 +62,14 @@ model VerificationToken {
   @@id([identifier, token])
 }
 
+model Track {
+  id                String  @id @default(cuid())
+  spotifyId         String? @unique
+  title             String
+  artist            String
+  uniquenessScore   Float
+}
+
 // Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique

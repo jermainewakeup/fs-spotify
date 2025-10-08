@@ -1,10 +1,4 @@
-// import { auth } from "@/auth";
-// import { redirect } from "next/navigation";
-
 import Link from "next/link";
-import {auth} from "@/auth";
-import {redirect} from "next/navigation";
-
 export default async function Home() {
     const displayedHeader = "Dogify";
     const displayedSubHeader = "See how your taste compares to your peers";
@@ -21,16 +15,16 @@ export default async function Home() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
                     <Link
-                        href="/sign-in"
+                        href="/dashboard"
                         className="inline-flex items-center justify-center rounded-md bg-green-500 px-5 py-3 font-medium text-white shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500/50"
                     >
                         {displayedSpotifyText}
                     </Link>
                     <a
-                        href="/leaderboard"
+                        href=""
                         className="inline-flex items-center justify-center rounded-md border border-foreground/20 px-5 py-3 font-medium hover:bg-foreground/5"
                     >
-                        See how unique you are
+                        Coming Soon
                     </a>
                 </div>
             </section>
